@@ -1,0 +1,61 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "抖音下载器",
+  "version": "0.6.0",
+  "identifier": "com.imsyy.yt-dlp-gui",
+  "build": {
+    "beforeDevCommand": "pnpm dev",
+    "devUrl": "http://localhost:15688",
+    "beforeBuildCommand": "pnpm build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "抖音下载器",
+        "width": 800,
+        "height": 600,
+        "visible": false
+      }
+    ],
+    "security": {
+      "csp": null
+    },
+    "trayIcon": {
+      "iconPath": "icons/icon.png",
+      "iconAsTemplate": true,
+      "tooltip": "抖音下载器"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "createUpdaterArtifacts": true,
+    "resources": {
+      "../browser-extension": "browser-extension"
+    },
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ]
+  },
+  "plugins": {
+    "deep-link": {
+      "desktop": {
+        "schemes": ["ytdlp-gui"]
+      }
+    },
+    "updater": {
+      "endpoints": [
+        "https://github.com/imsyy/yt-dlp-gui/releases/latest/download/latest.json"
+      ],
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEJENzM3NUZDRDIzNDM3MzcKUldRM056VFMvSFZ6dldFQXBCT0JXcmNLRHRmd0tKNE1ucEFnWTl2WHZOcHFSZ205QnFFNjRibUMK",
+      "windows": {
+        "installMode": "passive"
+      }
+    }
+  }
+}

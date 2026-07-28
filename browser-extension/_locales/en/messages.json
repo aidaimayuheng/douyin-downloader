@@ -1,0 +1,71 @@
+{
+  "extName": {
+    "message": "Douyin Downloader Helper"
+  },
+  "extDesc": {
+    "message": "Send video URLs and cookies from your browser to the Douyin Downloader desktop app."
+  },
+  "popupSupported": {
+    "message": "Supported video site"
+  },
+  "popupUnsupported": {
+    "message": "This page is not a supported video site"
+  },
+  "popupChecking": {
+    "message": "Checking page…"
+  },
+  "popupSendCookies": {
+    "message": "Send page cookies"
+  },
+  "popupSendCookiesHint": {
+    "message": "Required for members-only or login-restricted videos"
+  },
+  "popupSendBtn": {
+    "message": "Send to Douyin Downloader"
+  },
+  "popupSending": {
+    "message": "Sending…"
+  },
+  "popupSent": {
+    "message": "Sent! Switch to Douyin Downloader"
+  },
+  "popupFailed": {
+    "message": "Failed to send, please try again"
+  },
+  "popupAppNotFoundTitle": {
+    "message": "Did the app open?"
+  },
+  "popupAppNotFoundDesc": {
+    "message": "If nothing happened, make sure Douyin Downloader is installed and running."
+  },
+  "popupDownload": {
+    "message": "Download Douyin Downloader"
+  },
+  "popupSupportedSites": {
+    "message": "Supported sites"
+  },
+  "menuSendPage": {
+    "message": "Send page to Douyin Downloader"
+  },
+  "menuSendLink": {
+    "message": "Download link with Douyin Downloader"
+  },
+  "menuSendSelection": {
+    "message": "Send selected URL to Douyin Downloader"
+  },
+  "notifyTitle": {
+    "message": "Douyin Downloader Helper"
+  },
+  "notifySent": {
+    "message": "Request sent to Douyin Downloader"
+  },
+  "notifyFailed": {
+    "message": "Could not open Douyin Downloader. Make sure the app is installed."
+  },
+  "notifyUnsupported": {
+    "message": "This URL is not from a supported video site."
+  },
+  "badgeOn": {
+    "message": "↓"
+  }
+}

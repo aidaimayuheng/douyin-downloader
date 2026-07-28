@@ -1,0 +1,71 @@
+{
+  "extName": {
+    "message": "抖音下载器助手"
+  },
+  "extDesc": {
+    "message": "把视频网址和浏览器 Cookie 一键发送到抖音下载器进行下载。"
+  },
+  "popupSupported": {
+    "message": "已识别为支持的视频网站"
+  },
+  "popupUnsupported": {
+    "message": "当前页面不在支持列表中"
+  },
+  "popupChecking": {
+    "message": "正在识别页面…"
+  },
+  "popupSendCookies": {
+    "message": "同时发送 Cookie"
+  },
+  "popupSendCookiesHint": {
+    "message": "下载会员/登录后才能观看的视频时需要"
+  },
+  "popupSendBtn": {
+    "message": "发送到抖音下载器"
+  },
+  "popupSending": {
+    "message": "发送中…"
+  },
+  "popupSent": {
+    "message": "已发送，切换到抖音下载器查看"
+  },
+  "popupFailed": {
+    "message": "发送失败，请重试"
+  },
+  "popupAppNotFoundTitle": {
+    "message": "应用没有打开？"
+  },
+  "popupAppNotFoundDesc": {
+    "message": "如果没有任何反应，请确认抖音下载器已安装并保持运行。"
+  },
+  "popupDownload": {
+    "message": "下载抖音下载器"
+  },
+  "popupSupportedSites": {
+    "message": "支持的网站"
+  },
+  "menuSendPage": {
+    "message": "把当前页面发送到抖音下载器"
+  },
+  "menuSendLink": {
+    "message": "用抖音下载器下载此链接"
+  },
+  "menuSendSelection": {
+    "message": "把选中的链接发送到抖音下载器"
+  },
+  "notifyTitle": {
+    "message": "抖音下载器助手"
+  },
+  "notifySent": {
+    "message": "已请求抖音下载器处理"
+  },
+  "notifyFailed": {
+    "message": "无法唤起抖音下载器，请确认应用已安装。"
+  },
+  "notifyUnsupported": {
+    "message": "该链接不在支持的视频站点列表中。"
+  },
+  "badgeOn": {
+    "message": "↓"
+  }
+}

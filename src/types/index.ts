@@ -1,0 +1,221 @@
+export interface YtdlpStatus {
+  installed: boolean;
+  version: string;
+  path: string;
+  /** 当前实际使用的是应用管理副本（true）还是系统安装版本（false） */
+  isManaged: boolean;
+}
+
+export interface DenoStatus {
+  installed: boolean;
+  version: string;
+  path: string;
+  isManaged: boolean;
+}
+
+export interface DownloadProgress {
+  percent: number;
+  downloaded: number;
+  total: number;
+}
+
+export interface VideoFormat {
+  format_id: string;
+  ext: string;
+  resolution: string;
+  height: number | null;
+  width: number | null;
+  fps: number | null;
+  vcodec: string;
+  acodec: string;
+  filesize: number | null;
+  filesize_approx: number | null;
+  format_note: string;
+  tbr: number | null;
+  abr: number | null;
+}
+
+export interface ExtraOptions {
+  embedSubs: boolean;
+  embedThumbnail: boolean;
+  embedMetadata: boolean;
+  embedChapters: boolean;
+  sponsorblockRemove: boolean;
+  extractAudio: boolean;
+  audioConvertFormat: string;
+  noMerge: boolean;
+  recodeFormat: string;
+  limitRate: string;
+  ffmpegArgs: string;
+}
+
+export interface DownloadTaskParams {
+  url: string;
+  downloadDir: string;
+  downloadMode: string;
+  videoFormat: string | null;
+  audioFormat: string | null;
+  cookieFile: string | null;
+  cookieBrowser: string | null;
+  proxy: string | null;
+  outputTemplate: string | null;
+  concurrentFragments: number | null;
+  noOverwrites: boolean;
+  embedSubs: boolean;
+  embedThumbnail: boolean;
+  embedMetadata: boolean;
+  embedChapters: boolean;
+  sponsorblockRemove: boolean;
+  extractAudio: boolean;
+  audioConvertFormat: string | null;
+  noMerge: boolean;
+  recodeFormat: string | null;
+  limitRate: string | null;
+  ffmpegArgs: string | null;
+  subtitles: string[];
+  startTime: number | null;
+  endTime: number | null;
+  noPlaylist: boolean;
+  playlistItems: string | null;
+}
+
+export interface DownloadTask {
+  id: string;
+  url: string;
+  title: string;
+  thumbnail: string;
+  formatLabel: string;
+  status: "queued" | "downloading" | "paused" | "completed" | "error" | "cancelled";
+  percent: number;
+  speed: string;
+  eta: string;
+  downloaded: string;
+  total: string;
+  logs: string[];
+  error?: string;
+  outputFile?: string;
+  createdAt: number;
+  params: DownloadTaskParams;
+}
+
+export interface FetchedVideoData {
+  url: string;
+  videoInfo: VideoInfo;
+  videoFormats: VideoFormat[];
+  audioFormats: VideoFormat[];
+  isPlaylist: boolean;
+  playlistEntries: PlaylistEntry[];
+}
+
+export interface PendingItem extends FetchedVideoData {
+  id: string;
+  createdAt: number;
+  selectedPlaylistItems: number[];
+  downloadMode: "default" | "video" | "audio";
+  selectedVideoFormat: string;
+  selectedAudioFormat: string;
+  startTime: number | null;
+  endTime: number | null;
+  embedSubs: boolean;
+  embedThumbnail: boolean;
+  embedMetadata: boolean;
+  embedChapters: boolean;
+  sponsorblockRemove: boolean;
+  extractAudio: boolean;
+  audioConvertFormat: string;
+  noMerge: boolean;
+  recodeFormat: string;
+  limitRate: string;
+  ffmpegArgs: string;
+  selectedSubtitles: string[];
+}
+
+export interface PlaylistEntry {
+  id: string;
+  title: string;
+  duration: number | null;
+  url: string;
+  thumbnail?: string;
+  formats?: VideoFormat[];
+  subtitles?: Record<string, { ext: string; url: string; name?: string }[]>;
+  automatic_captions?: Record<string, { ext: string; url: string; name?: string }[]>;
+}
+
+export interface ThumbnailInfo {
+  url: string;
+  height?: number;
+  width?: number;
+  resolution?: string;
+  id?: string;
+}
+
+export interface VideoInfo {
+  title: string;
+  thumbnail: string;
+  thumbnails?: ThumbnailInfo[];
+  duration: number;
+  uploader: string;
+  view_count: number;
+  upload_date: string;
+  description: string;
+  formats: VideoFormat[];
+  subtitles: Record<string, { ext: string; url: string; name?: string }[]>;
+  automatic_captions: Record<string, { ext: string; url: string; name?: string }[]>;
+  /** Playlist fields — present when the URL is a playlist */
+  _type?: string;
+  entries?: PlaylistEntry[];
+  playlist_count?: number;
+}
+
+export interface Chapter {
+  title: string;
+  start_time: number;
+  end_time: number;
+}
+
+export interface ChaptersInfo {
+  title: string;
+  duration: number | null;
+  chapters: Chapter[];
+}
+
+export interface VideoComment {
+  id: string;
+  parent: string;
+  author: string;
+  author_id: string;
+  text: string;
+  timestamp: number;
+  like_count: number;
+  is_favorited: boolean;
+  author_is_uploader: boolean;
+}
+
+export interface CommentsInfo {
+  title: string;
+  comment_count: number | null;
+  comments: VideoComment[];
+}
+
+export interface LiveChatMessage {
+  idx: number;
+  time: string;
+  timestamp_usec: number;
+  author: string;
+  channel_id: string;
+  message: string;
+  msg_type: string;
+  amount: string;
+}
+
+export interface SubtitleTrack {
+  ext: string;
+  url: string;
+  name?: string;
+}
+
+export interface SubtitleInfo {
+  title: string;
+  subtitles: Record<string, SubtitleTrack[]>;
+  automatic_captions: Record<string, SubtitleTrack[]>;
+}
