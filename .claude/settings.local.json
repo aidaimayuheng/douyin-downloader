@@ -13,7 +13,9 @@
       "Bash(pnpm:*)",
       "Bash(ls:*)",
       "Bash(cargo clippy:*)",
-      "WebFetch(domain:www.naiveui.com)"
+      "WebFetch(domain:www.naiveui.com)",
+      "Bash(ssh *)",
+      "Bash(gh run *)"
     ]
   }
 }

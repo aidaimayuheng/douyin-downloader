@@ -45,17 +45,10 @@ jobs:
         shell: pwsh
         run: |
           New-Item -ItemType Directory -Force -Path exe
-          # NSIS installer exe
           $nsisExe = Get-ChildItem -Path "src-tauri/target/x86_64-pc-windows-msvc/release/bundle/nsis/*.exe" -ErrorAction SilentlyContinue
           if ($nsisExe) {
             Copy-Item $nsisExe.FullName -Destination exe/
             Write-Host "Copied NSIS installer: $($nsisExe.Name)"
-          }
-          # MSI installer
-          $msiFile = Get-ChildItem -Path "src-tauri/target/x86_64-pc-windows-msvc/release/bundle/msi/*.msi" -ErrorAction SilentlyContinue
-          if ($msiFile) {
-            Copy-Item $msiFile.FullName -Destination exe/
-            Write-Host "Copied MSI: $($msiFile.Name)"
           }
           # Standalone exe
           $standaloneExe = "src-tauri/target/x86_64-pc-windows-msvc/release/抖音下载器.exe"
@@ -72,7 +65,6 @@ jobs:
           name: douyin-downloader-windows
           path: |
             exe/*.exe
-            exe/*.msi
 
       - name: Commit exe to repo
         run: |
