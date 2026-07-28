@@ -28,6 +28,27 @@ const BADGE_COLOR = "#18A058";
 
 const t = (key) => chrome.i18n.getMessage(key) || key;
 
+/** 规范化抖音链接：将 modal_id 等非标准格式转为 /video/{id} */
+function normalizeDouyinUrl(urlStr) {
+  try {
+    const url = new URL(urlStr);
+    const host = url.hostname;
+    if (!["douyin.com", "iesdouyin.com"].some((d) => host === d || host.endsWith("." + d))) {
+      return urlStr;
+    }
+    // 已经是 /video/ 或 /note/ 格式
+    if (/^\/(video|note)\/\d+/.test(url.pathname)) return urlStr;
+    // 从 modal_id 提取视频 ID
+    const modalId = url.searchParams.get("modal_id");
+    if (modalId && /^\d+$/.test(modalId)) {
+      return `https://${url.hostname}/video/${modalId}`;
+    }
+    return urlStr;
+  } catch {
+    return urlStr;
+  }
+}
+
 function isSupportedUrl(url) {
   if (!url) return false;
   try {
@@ -99,8 +120,9 @@ async function sendToApp(videoUrl, { withCookies = true } = {}) {
     notify("notifyUnsupported");
     return;
   }
+  const normalizedUrl = normalizeDouyinUrl(videoUrl);
   const cookieText = withCookies ? await getCookieText(videoUrl) : "";
-  const link = buildDeepLink(videoUrl, cookieText);
+  const link = buildDeepLink(normalizedUrl, cookieText);
   const ok = await dispatchDeepLink(link);
   notify(ok ? "notifySent" : "notifyFailed");
 }

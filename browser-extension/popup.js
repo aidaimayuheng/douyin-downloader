@@ -26,6 +26,25 @@ const ALL_DOMAINS = SUPPORTED_SITES.flatMap((s) => s.domains);
 
 const t = (key) => chrome.i18n.getMessage(key) || key;
 
+/** 规范化抖音链接：将 modal_id 等非标准格式转为 /video/{id} */
+function normalizeDouyinUrl(urlStr) {
+  try {
+    const url = new URL(urlStr);
+    const host = url.hostname;
+    if (!["douyin.com", "iesdouyin.com"].some((d) => host === d || host.endsWith("." + d))) {
+      return urlStr;
+    }
+    if (/^\/(video|note)\/\d+/.test(url.pathname)) return urlStr;
+    const modalId = url.searchParams.get("modal_id");
+    if (modalId && /^\d+$/.test(modalId)) {
+      return `https://${url.hostname}/video/${modalId}`;
+    }
+    return urlStr;
+  } catch {
+    return urlStr;
+  }
+}
+
 function isSupportedUrl(url) {
   if (!url) return false;
   try {
@@ -126,7 +145,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     try {
       const cookieText = sendCookies.checked ? await getCookieText(pageUrl) : "";
-      const deepLink = buildDeepLink(pageUrl, cookieText);
+      const normalizedUrl = normalizeDouyinUrl(pageUrl);
+      const deepLink = buildDeepLink(normalizedUrl, cookieText);
 
       // Navigating the popup itself triggers the OS protocol handler. The popup
       // closes when the OS handler takes over. If the popup is still here a
