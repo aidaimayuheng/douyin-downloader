@@ -30,7 +30,7 @@
   "bundle": {
     "active": true,
     "targets": ["nsis"],
-    "createUpdaterArtifacts": true,
+    "createUpdaterArtifacts": false,
     "resources": {
       "../browser-extension": "browser-extension"
     },
