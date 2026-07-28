@@ -39,7 +39,7 @@ function isSupportedUrl(url) {
 }
 
 function toNetscapeLine(c) {
-  const domain = c.domain.startsWith(".") ? c.domain : "." + c.domain;
+  const domain = c.domain;
   const flag = c.domain.startsWith(".") ? "TRUE" : "FALSE";
   const secure = c.secure ? "TRUE" : "FALSE";
   const expiry = c.expirationDate ? Math.floor(c.expirationDate) : 0;

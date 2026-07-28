@@ -37,7 +37,8 @@ function isSupportedUrl(url) {
 }
 
 function toNetscapeLine(c) {
-  const domain = c.domain.startsWith(".") ? c.domain : "." + c.domain;
+  // 域名级 cookie（如 .douyin.com）匹配所有子域；主机级 cookie（如 www.douyin.com）仅匹配该主机
+  const domain = c.domain;
   const flag = c.domain.startsWith(".") ? "TRUE" : "FALSE";
   const secure = c.secure ? "TRUE" : "FALSE";
   const expiry = c.expirationDate ? Math.floor(c.expirationDate) : 0;
