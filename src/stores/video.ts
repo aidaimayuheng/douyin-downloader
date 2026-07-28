@@ -125,6 +125,7 @@ export const useVideoStore = defineStore("video", () => {
       };
     } catch (e: unknown) {
       const raw = e instanceof Error ? e.message : String(e) || "获取视频信息失败";
+      console.error("[VideoStore] fetchVideoInfo failed:", raw);
       if (/err_ytdlp_not_installed/.test(raw)) {
         const statusStore = useStatusStore();
         statusStore.showYtdlpSetupModal = true;

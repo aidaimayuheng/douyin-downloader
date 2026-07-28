@@ -97,23 +97,26 @@ const handleDeepLink = (deepLinkUrl: string) => {
   if (deepLinkUrl === lastDeepLink && now - lastDeepLinkAt < 1500) return;
   lastDeepLink = deepLinkUrl;
   lastDeepLinkAt = now;
+  console.log("[DeepLink] Received:", deepLinkUrl.substring(0, 120));
   try {
     const url = new URL(deepLinkUrl);
     if (url.host !== "download") return;
     const videoUrl = url.searchParams.get("url");
     if (!videoUrl) return;
     const cookies = url.searchParams.get("cookies");
+    console.log("[DeepLink] videoUrl:", videoUrl, "hasCookies:", !!cookies);
     if (cookies) {
       try {
         settingStore.cookieText = decodeURIComponent(atob(cookies));
         settingStore.cookieMode = "text";
-      } catch {
-        // Cookie 解码失败，忽略
+        window.$message.success(`已接收 Cookie (${settingStore.cookieText.length} 字符)`);
+      } catch (e) {
+        console.error("[DeepLink] Cookie decode failed:", e);
       }
     }
     router.push({ name: "home", query: { url: videoUrl } });
-  } catch {
-    // 无效的深链接 URL，忽略
+  } catch (e) {
+    console.error("[DeepLink] Parse failed:", e);
   }
 };
 
