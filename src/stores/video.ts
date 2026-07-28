@@ -103,18 +103,18 @@ export const useVideoStore = defineStore("video", () => {
         .filter((f) => f.acodec && f.acodec !== "none" && (!f.vcodec || f.vcodec === "none"))
         .sort((a, b) => (b.abr || 0) - (a.abr || 0));
       // 如果没有分离式格式，回退到合并式格式（抖音/B站等）
-      // 去重：同一分辨率+编码只保留一个，避免重复来源导致选到不可用格式
+      // 去重：同一分辨率+编码+码率只保留一个，避免重复来源导致选到不可用格式
       if (videoFormats.length === 0 && audioFormats.length === 0) {
         const seen = new Set<string>();
         videoFormats = formats
           .filter((f) => f.vcodec && f.vcodec !== "none")
           .filter((f) => {
-            const key = `${f.height}x${f.vcodec}`;
+            const key = `${f.height}x${f.vcodec}x${Math.round((f.tbr || 0) / 50)}`;
             if (seen.has(key)) return false;
             seen.add(key);
             return true;
           })
-          .sort((a, b) => (b.height || 0) - (a.height || 0));
+          .sort((a, b) => (b.height || 0) - (a.height || 0) || (b.tbr || 0) - (a.tbr || 0));
       }
 
       // YouTube URL 且 Deno 未安装时提示
