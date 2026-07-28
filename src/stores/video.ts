@@ -95,12 +95,19 @@ export const useVideoStore = defineStore("video", () => {
       }
 
       const formats: VideoFormat[] = videoInfo.formats || [];
-      const videoFormats = formats
+      // 先尝试分离式格式（YouTube 风格：纯视频 + 纯音频）
+      let videoFormats = formats
         .filter((f) => f.vcodec && f.vcodec !== "none" && (!f.acodec || f.acodec === "none"))
         .sort((a, b) => (b.height || 0) - (a.height || 0));
-      const audioFormats = formats
+      let audioFormats = formats
         .filter((f) => f.acodec && f.acodec !== "none" && (!f.vcodec || f.vcodec === "none"))
         .sort((a, b) => (b.abr || 0) - (a.abr || 0));
+      // 如果没有分离式格式，回退到合并式格式（抖音/B站等）
+      if (videoFormats.length === 0 && audioFormats.length === 0) {
+        videoFormats = formats
+          .filter((f) => f.vcodec && f.vcodec !== "none")
+          .sort((a, b) => (b.height || 0) - (a.height || 0));
+      }
 
       // YouTube URL 且 Deno 未安装时提示
       if (/youtube\.com|youtu\.be/i.test(targetUrl)) {
