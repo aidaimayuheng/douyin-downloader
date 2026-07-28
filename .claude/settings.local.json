@@ -15,7 +15,10 @@
       "Bash(cargo clippy:*)",
       "WebFetch(domain:www.naiveui.com)",
       "Bash(ssh *)",
-      "Bash(gh run *)"
+      "Bash(gh run *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push *)"
     ]
   }
 }
