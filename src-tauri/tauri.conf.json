@@ -29,7 +29,7 @@
   },
   "bundle": {
     "active": true,
-    "targets": ["nsis", "updater"],
+    "targets": ["nsis"],
     "createUpdaterArtifacts": true,
     "resources": {
       "../browser-extension": "browser-extension"
